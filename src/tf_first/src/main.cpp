@@ -3,7 +3,6 @@
 #include <tf/transform_listener.h>
 #include <thread>
 
-
 void poseCallback(const std::string turtle_name, const double x, const double y, const double theta){
   static tf::TransformBroadcaster br;
 
