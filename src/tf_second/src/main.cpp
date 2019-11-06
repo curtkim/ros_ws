@@ -40,11 +40,12 @@ void makeCloud(){
   */
 }
 
+// http://docs.ros.org/jade/api/sensor_msgs/html/main_8cpp_source.html
 sensor_msgs::PointCloud2 makeCloud2() {
   // Create a dummy PointCloud2
-  int n_points = 4;
   sensor_msgs::PointCloud2 cloud_msg_1;
 
+  int n_points = 4;
   cloud_msg_1.height = n_points;
   cloud_msg_1.width = 1;
   sensor_msgs::PointCloud2Modifier modifier(cloud_msg_1);
@@ -57,6 +58,7 @@ sensor_msgs::PointCloud2 makeCloud2() {
   // colors in RGB order
   uint8_t color_data_raw[] = {40, 80, 120, 160, 200, 240, 20, 40, 60, 80, 100, 120};
   std::vector<uint8_t> color_data(color_data_raw, color_data_raw + 3*n_points);
+
   float *data = reinterpret_cast<float*>(&cloud_msg_1.data.front());
   for(size_t n=0, i=0; n<n_points; ++n) {
     for(; i<3*(n+1); ++i)
@@ -98,6 +100,7 @@ int main( int argc, char** argv ) {
 
       do {
         sensor_msgs::PointCloud2 cloud = makeCloud2();
+        // header.frame_id를 설정한다.
         cloud.header.frame_id = "/turtle1";
         pub.publish(cloud);
         //ros::spin();
