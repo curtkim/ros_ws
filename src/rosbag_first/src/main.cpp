@@ -7,6 +7,10 @@
 #include <std_msgs/String.h>
 
 void write() {
+
+  // 없으면 ros::Time::now() 사용할때 에러가 발생한다.
+  ros::Time::init();
+
   rosbag::Bag bag;
   bag.open("test.bag", rosbag::bagmode::Write);
 
@@ -46,9 +50,6 @@ void read() {
 }
 
 int main( int argc, char** argv ) {
-
-  // 없으면 ros::Time::now() 사용할때 에러가 발생한다.
-  ros::Time::init();
 
   write();
   read();
